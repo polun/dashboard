@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 app = Flask(__name__)
 
 auth_url = 'https://api.weibo.com/oauth2/authorize?client_id=4177092657\
@@ -16,8 +16,10 @@ def weibo_favorite():
     return render_template('weibo_favorite.html')
 
 @app.route('/weibo/redirectURI')
-def weibo_redirectURI(code):
+def weibo_redirectURI():
+    code = request.args.get('code')
     print code
+    return render_template("weibo_favorite.html")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8090)
+    app.run(debug=True, port=8090, host='0.0.0.0')
