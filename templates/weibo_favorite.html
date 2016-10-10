@@ -1,4 +1,9 @@
 {% extends "layout.html" %}
 {% block body %}
 <h2>微博收藏</h2>
+{% if favorites %}
+<span>{{ favorites }}</span>
+{% else %}
+<h3>暂无收藏</h3>
+{% endif %}
 {% endblock %}
