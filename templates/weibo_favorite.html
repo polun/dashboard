@@ -1,8 +1,27 @@
 {% extends "layout.html" %}
 {% block body %}
-<h2>微博收藏</h2>
+<a href="{{ url_for('main_page') }}"> << 返回</a>
+<h2>收藏</h2>
 {% if favorites %}
-<span>{{ favorites }}</span>
+{% for item in favorites %}
+    <li style="line-height: 25px">{{ item.status.text }}
+    {% if item.status.pic_urls | length > 0 %}
+        {% for pic in item.status.pic_urls %}
+            <a href="{{ pic.thumbnail_pic }}" style="margin-left: 5px" target="_blank">图片</a>
+        {% endfor %}
+    {% endif %}
+    {% if item.status.retweeted_status %}
+        <div style="margin-left: 50px">
+            <strong>转:</strong> {{ item.status.retweeted_status.text }}
+            {% if item.status.retweeted_status.pic_urls | length > 0 %}
+                {% for pic in item.status.retweeted_status.pic_urls %}
+                    <a href="{{ pic.thumbnail_pic }}" style="margin-left: 5px" target="_blank">图片</a>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+</li>
+{% endfor %}
 {% else %}
 <h3>暂无收藏</h3>
 {% endif %}

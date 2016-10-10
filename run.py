@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, redirect, request
+import json
+
 import requests
 
 app = Flask(__name__)
@@ -18,9 +20,8 @@ def main_page():
 def weibo_favorite():
     global weibo_favorite
     res = requests.get(weibo_favorite_api)
-    res.text
 
-    return render_template('weibo_favorite.html', favorites=res.text)
+    return render_template('weibo_favorite.html', favorites=json.loads(res.text)['favorites'])
 
 @app.route('/weibo/redirectURI')
 def weibo_redirectURI():
