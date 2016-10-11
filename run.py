@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, redirect, request
+from dao.weibo import WeiboDao
 import json
 
 import requests
@@ -14,6 +15,10 @@ weibo_favorite_api = 'https://api.weibo.com/2/favorites.json?access_token=2.00RS
 
 @app.route('/')
 def main_page():
+    weibo_dao = WeiboDao()
+    weibo_dao.add(None)
+
+    # print weibo_dao.get(1)
     return render_template('index.html')
 
 @app.route('/weibo_favorite')
