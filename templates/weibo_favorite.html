@@ -5,6 +5,7 @@
 {% if favorites %}
 {% for item in favorites %}
     <li style="line-height: 25px">{{ item.status.text }}
+        <span>时间: {{ item.status.created_at }}</span>
     {% if item.status.pic_urls | length > 0 %}
         {% for pic in item.status.pic_urls %}
             <a href="{{ pic.thumbnail_pic }}" style="margin-left: 5px" target="_blank">图片</a>
@@ -20,7 +21,7 @@
             {% endif %}
         </div>
     {% endif %}
-</li>
+    </li>
 {% endfor %}
 {% else %}
 <h3>暂无收藏</h3>
