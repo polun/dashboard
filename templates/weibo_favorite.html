@@ -4,9 +4,13 @@
 <h2>收藏</h2>
 {% if favorites %}
 {% for item in favorites %}
-    <li style="line-height: 25px">{{ item.status.text }}
-        <span>时间: {{ item.status.created_at }}</span>
-    {% if item.status.pic_urls | length > 0 %}
+    <li style="line-height: 25px">
+        {% if item.status.user %}
+            <span style="display: block">用户: {{ item.status.user.name }}</span>
+        {% endif %}
+        <span style="display: block">{{ item.status.text }}</span>
+        <span style="display: block">时间: {{ t_strptime(item.status.created_at).strftime('%Y-%m-%d %H:%M:%S') }}</span>
+        {% if item.status.pic_urls | length > 0 %}
         {% for pic in item.status.pic_urls %}
             <a href="{{ pic.thumbnail_pic }}" style="margin-left: 5px" target="_blank">图片</a>
         {% endfor %}

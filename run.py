@@ -5,10 +5,13 @@ import json
 import time
 
 from dao.weiboinfo_dao import WeiboInfoDao
+from util.util import TimeUtil
 
 import requests
 
 app = Flask(__name__)
+
+app.jinja_env.globals.update(t_strptime=TimeUtil.t_strptime)
 
 redirect_uri = 'http://123.56.226.235:8090/weibo/redirectURI'
 auth_url = 'https://api.weibo.com/oauth2/authorize?client_id=4177092657&response_type=code&redirect_uri=' + redirect_uri
@@ -42,7 +45,7 @@ def weibo_auth_redirectURI():
     entity = WeiboInfo(access_token=auth_res['access_token'], \
         expires_in=auth_res['expires_in'], uid=auth_res['uid'])
     weibo_info_dao.add(entity)
-    
+
     return render_template('weibo_favorite.html')
 
 
