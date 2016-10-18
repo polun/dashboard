@@ -14,4 +14,5 @@
 - 文章(博客)
 
 ## TODO
-**里面太多的global了**
+- **里面太多的global了**
+- 觉得这个模版挺不错的 http://blog.soliloquize.org/
